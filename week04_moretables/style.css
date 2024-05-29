@@ -1,0 +1,37 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0px;
+}
+
+#pageHeader, #pageFooter {
+    background: black;
+    color: white;
+}
+
+#pageFooter {
+    font-size: small;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#pageHeader img {
+    width: 100%;
+}
+#menu {
+    background: yellow;
+    color: green;
+    width: 100px;
+}
+
+#mainContent {
+    background: lightgray;
+    color: black;
+}
+
+td {
+    vertical-align: top;
+}
+
+.rotatedText {
+    writing-mode: vertical-lr;
+    color: yellow;
+}
