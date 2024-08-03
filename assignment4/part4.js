@@ -145,3 +145,50 @@ class EvilCircle extends Shape {
         }
     }
 }
+
+const balls = [];
+
+while (balls.length < 25) {
+    const size = random(10, 20);
+    const ball = new Ball(
+        random(0 + size, canvas.width - size),
+        random(0 + size, canvas.height - size),
+        random(-7, 7),
+        random(-7, 7),
+        size,
+        randomColor()
+    );
+
+    balls.push(ball);
+}
+
+const evilCircle = new EvilCircle(100, 100);
+
+let ballCount = balls.length;
+
+function updateBallCount() {
+    document.querySelector('p').textContent = `Ball count: ${ballCount}`;
+}
+
+function loop() {
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.25)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    for (const ball of balls) {
+        if (ball.exists) {
+            ball.draw();
+            ball.update();
+            ball.collisionDetect();
+        }
+    }
+
+    evilCircle.draw();
+    evilCircle.checkBounds();
+    evilCircle.collisionDetect();
+
+    requestAnimationFrame(loop);
+}
+
+updateBallCount();
+
+loop();
