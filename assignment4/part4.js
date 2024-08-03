@@ -1,22 +1,24 @@
-// Select the canvas and get its context
+
+/*	Name: Sebastian Cosentino
+	File: part4.js
+	Date: August 2, 2024
+	Purpose: Part 4 js of assignment 4
+    */
+
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 
-// Set the canvas dimensions to fill the window
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-// Function to generate a random number between min and max
 function random(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// Function to generate a random color
 function randomColor() {
     return 'rgb(' + random(0, 255) + ',' + random(0, 255) + ',' + random(0, 255) + ')';
 }
 
-// Define the Shape class
 class Shape {
     constructor(x, y, velX, velY) {
         this.x = x;
@@ -26,7 +28,6 @@ class Shape {
     }
 }
 
-// Define the Ball class extending Shape
 class Ball extends Shape {
     constructor(x, y, velX, velY, size, color) {
         super(x, y, velX, velY);
@@ -78,7 +79,6 @@ class Ball extends Shape {
     }
 }
 
-// Define the EvilCircle class extending Shape
 class EvilCircle extends Shape {
     constructor(x, y) {
         super(x, y, 20, 20);
@@ -145,62 +145,3 @@ class EvilCircle extends Shape {
         }
     }
 }
-
-// Array to store all the balls
-const balls = [];
-
-// Create 25 balls with random properties and add them to the array
-while (balls.length < 25) {
-    const size = random(10, 20);
-    const ball = new Ball(
-        random(0 + size, canvas.width - size),
-        random(0 + size, canvas.height - size),
-        random(-7, 7),
-        random(-7, 7),
-        size,
-        randomColor()
-    );
-
-    balls.push(ball);
-}
-
-// Create a single evil circle
-const evilCircle = new EvilCircle(100, 100);
-
-// Variable to keep track of ball count
-let ballCount = balls.length;
-
-// Function to update the ball count display
-function updateBallCount() {
-    document.querySelector('p').textContent = `Ball count: ${ballCount}`;
-}
-
-// Animation loop
-function loop() {
-    // Clear the canvas with a semi-transparent black rectangle to create a trail effect
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.25)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    // Draw, update, and detect collisions for each ball
-    for (const ball of balls) {
-        if (ball.exists) {
-            ball.draw();
-            ball.update();
-            ball.collisionDetect();
-        }
-    }
-
-    // Draw, check bounds, and detect collisions for the evil circle
-    evilCircle.draw();
-    evilCircle.checkBounds();
-    evilCircle.collisionDetect();
-
-    // Request the next frame of the animation
-    requestAnimationFrame(loop);
-}
-
-// Update the ball count display initially
-updateBallCount();
-
-// Start the animation
-loop();
