@@ -56,3 +56,31 @@ Ball.prototype.update = function() {
     this.y += this.velY;
 };
 
+Ball.prototype.collisionDetect = function() {
+    for (let j = 0; j < balls.length; j++) {
+        if (!(this === balls[j])) {
+            const dx = this.x - balls[j].x;
+            const dy = this.y - balls[j].y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < this.size + balls[j].size) {
+                balls[j].color = this.color = randomColor();
+            }
+        }
+    }
+};
+
+const balls = [];
+
+while (balls.length < 25) {
+    const size = random(10, 20);
+    const ball = new Ball(
+        random(0 + size, canvas.width - size),
+        random(0 + size, canvas.height - size),
+        random(-7, 7),
+        random(-7, 7),
+        randomColor(),
+        size
+    );
+    balls.push(ball);
+}
