@@ -1,7 +1,7 @@
 /*	Name: Sebastian Cosentino
-	File: index.html
+	File: main.js
 	Date: August 15 2024
-	HTML for Assignment 5
+	JS for Assignment 5
   */
 
 // functionality for showing/hiding the comments section
